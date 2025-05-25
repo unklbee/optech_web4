@@ -1,0 +1,634 @@
+/* Apple Theme System - DRY CSS Architecture */
+
+/* ==================================================
+   CSS CUSTOM PROPERTIES (DRY Color System)
+   ================================================== */
+
+:root {
+    /* Apple Color Palette */
+    --apple-white: #ffffff;
+    --apple-light-gray: #f5f5f7;
+    --apple-dark-gray: #1d1d1f;
+    --apple-black: #000000;
+    --apple-text-secondary: #86868b;
+    --apple-text-tertiary: #a1a1a6;
+    --apple-blue: #0071e3;
+    --apple-blue-hover: #0077ed;
+    --apple-blue-dark: #0984ff;
+    --apple-green: #30d158;
+    --apple-separator-light: rgba(0, 0, 0, 0.08);
+    --apple-separator-dark: rgba(255, 255, 255, 0.08);
+    --apple-hover-light: rgba(0, 0, 0, 0.04);
+    --apple-hover-dark: rgba(255, 255, 255, 0.08);
+    --apple-card-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --apple-card-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    /* Apple Timing */
+    --apple-easing: cubic-bezier(0.4, 0, 0.6, 1);
+    --apple-duration-fast: 0.2s;
+    --apple-duration-medium: 0.3s;
+    --apple-duration-slow: 0.4s;
+
+    /* Apple Spacing */
+    --apple-spacing-xs: 8px;
+    --apple-spacing-sm: 16px;
+    --apple-spacing-md: 24px;
+    --apple-spacing-lg: 32px;
+    --apple-spacing-xl: 48px;
+    --apple-spacing-xxl: 64px;
+
+    /* Apple Radius */
+    --apple-radius-sm: 8px;
+    --apple-radius-md: 12px;
+    --apple-radius-lg: 18px;
+    --apple-radius-full: 980px;
+}
+
+/* ==================================================
+   THEME CONFIGURATION (DRY)
+   ================================================== */
+
+/* Light Theme Variables */
+[data-theme="light"] {
+    color-scheme: light;
+
+    /* Semantic Colors */
+    --theme-bg-primary: var(--apple-white);
+    --theme-bg-secondary: var(--apple-light-gray);
+    --theme-text-primary: var(--apple-dark-gray);
+    --theme-text-secondary: var(--apple-text-secondary);
+    --theme-text-tertiary: var(--apple-text-tertiary);
+
+    /* Interactive Colors */
+    --theme-hover: var(--apple-hover-light);
+    --theme-separator: var(--apple-separator-light);
+    --theme-blue: var(--apple-blue);
+    --theme-blue-hover: var(--apple-blue-hover);
+
+    /* Navbar */
+    --navbar-bg: rgba(255, 255, 255, 0.95);
+    --navbar-bg-scrolled: rgba(255, 255, 255, 0.95);
+    --navbar-border: var(--apple-separator-light);
+    --navbar-text: var(--apple-dark-gray);
+
+    /* Cards */
+    --card-bg: var(--apple-white);
+    --card-border: transparent;
+    --card-shadow: var(--apple-card-shadow);
+    --card-shadow-hover: var(--apple-card-shadow-hover);
+
+    /* Footer */
+    --footer-bg: var(--apple-light-gray);
+    --footer-text: var(--apple-text-secondary);
+    --footer-link: var(--apple-text-secondary);
+    --footer-link-hover: var(--apple-blue);
+    --footer-border: #d2d2d7;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+    color-scheme: dark;
+
+    /* Semantic Colors */
+    --theme-bg-primary: var(--apple-black);
+    --theme-bg-secondary: var(--apple-dark-gray);
+    --theme-text-primary: var(--apple-light-gray);
+    --theme-text-secondary: var(--apple-text-secondary);
+    --theme-text-tertiary: var(--apple-text-tertiary);
+
+    /* Interactive Colors */
+    --theme-hover: var(--apple-hover-dark);
+    --theme-separator: var(--apple-separator-dark);
+    --theme-blue: var(--apple-blue-dark);
+    --theme-blue-hover: #0a84ff;
+
+    /* Navbar */
+    --navbar-bg: rgba(0, 0, 0, 0.8);
+    --navbar-bg-scrolled: rgba(0, 0, 0, 0.95);
+    --navbar-border: rgba(255, 255, 255, 0.08);
+    --navbar-text: var(--apple-light-gray);
+
+    /* Cards */
+    --card-bg: var(--apple-dark-gray);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: 0 8px 25px rgba(255, 255, 255, 0.1);
+
+    /* Footer */
+    --footer-bg: var(--apple-dark-gray);
+    --footer-text: var(--apple-text-tertiary);
+    --footer-link: var(--apple-text-tertiary);
+    --footer-link-hover: var(--theme-blue);
+    --footer-border: #424245;
+}
+
+/* ==================================================
+   BASE STYLES (DRY)
+   ================================================== */
+
+body {
+    background-color: var(--theme-bg-primary);
+    color: var(--theme-text-primary);
+    transition: background-color var(--apple-duration-medium) var(--apple-easing),
+    color var(--apple-duration-medium) var(--apple-easing);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--theme-text-primary);
+}
+
+/* ==================================================
+   NAVIGATION (DRY)
+   ================================================== */
+
+.navbar {
+    background-color: var(--navbar-bg);
+    border-bottom: 1px solid var(--navbar-border);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    transition: all var(--apple-duration-medium) var(--apple-easing);
+}
+
+.navbar.navbar-scrolled {
+    background-color: var(--navbar-bg-scrolled);
+    backdrop-filter: saturate(180%) blur(30px);
+    -webkit-backdrop-filter: saturate(180%) blur(30px);
+    border-bottom-color: var(--navbar-border);
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: var(--navbar-text) !important;
+    transition: background-color var(--apple-duration-fast) var(--apple-easing);
+}
+
+.navbar-nav .nav-link:hover,
+.theme-toggle:hover {
+    background-color: var(--theme-hover);
+}
+
+.navbar-nav .nav-link.active {
+    background-color: var(--theme-hover);
+    opacity: 0.8;
+}
+
+/* ==================================================
+   THEME TOGGLE (DRY)
+   ================================================== */
+
+.theme-toggle {
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle svg {
+    transition: transform var(--apple-duration-medium) var(--apple-easing);
+}
+
+.theme-toggle:hover svg {
+    transform: scale(1.1);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--theme-blue);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ==================================================
+   CARDS SYSTEM (DRY)
+   ================================================== */
+
+.card,
+.service-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    transition: all var(--apple-duration-slow) var(--apple-easing);
+}
+
+.card:hover,
+.service-card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-4px);
+}
+
+.service-card .card-body {
+    text-align: center;
+}
+
+.service-title {
+    color: var(--theme-text-primary);
+}
+
+.service-description {
+    color: var(--theme-text-secondary);
+}
+
+.service-icon {
+    background: rgba(0, 113, 227, 0.1);
+    transition: all var(--apple-duration-medium) var(--apple-easing);
+}
+
+.service-card:hover .service-icon {
+    background: rgba(0, 113, 227, 0.15);
+    transform: scale(1.05);
+}
+
+.service-icon svg {
+    color: var(--theme-blue);
+}
+
+/* ==================================================
+   BUTTONS (DRY)
+   ================================================== */
+
+.btn {
+    border-radius: var(--apple-radius-full);
+    transition: all var(--apple-duration-medium) var(--apple-easing);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: var(--theme-blue);
+    border-color: var(--theme-blue);
+    color: var(--apple-white);
+}
+
+.btn-primary:hover {
+    background: var(--theme-blue-hover);
+    border-color: var(--theme-blue-hover);
+    color: var(--apple-white);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--theme-blue);
+    border-color: var(--theme-blue);
+}
+
+.btn-secondary:hover {
+    background: var(--theme-blue);
+    color: var(--apple-white);
+}
+
+.btn-light {
+    background: var(--theme-bg-secondary);
+    color: var(--theme-text-primary);
+    border-color: transparent;
+}
+
+.btn-light:hover {
+    background: var(--theme-hover);
+    color: var(--theme-text-primary);
+}
+
+.service-card .btn {
+    color: var(--theme-blue);
+    border-color: var(--theme-blue);
+}
+
+.service-card .btn:hover {
+    background: var(--theme-blue);
+    color: var(--apple-white);
+}
+
+/* ==================================================
+   SECTIONS (DRY)
+   ================================================== */
+
+.services-preview {
+    background: var(--theme-bg-secondary);
+}
+
+.services-preview .section-title {
+    color: var(--theme-text-primary);
+}
+
+.services-preview .section-subtitle {
+    color: var(--theme-text-secondary);
+}
+
+.about-snippet {
+    background: var(--theme-bg-primary);
+}
+
+.about-snippet .section-title {
+    color: var(--theme-text-primary);
+}
+
+.about-snippet .lead {
+    color: var(--theme-text-secondary);
+}
+
+.feature-list li {
+    color: var(--theme-text-primary);
+}
+
+.feature-list svg {
+    color: var(--apple-green);
+}
+
+/* ==================================================
+   FOOTER (DRY)
+   ================================================== */
+
+footer {
+    background-color: var(--footer-bg);
+    border-top: 1px solid var(--footer-border);
+}
+
+.footer-links {
+    border-bottom: 1px solid var(--footer-border);
+}
+
+.footer-section h4 {
+    color: var(--theme-text-primary);
+}
+
+.footer-section a {
+    color: var(--footer-link);
+    transition: color var(--apple-duration-fast) var(--apple-easing);
+}
+
+.footer-section a:hover {
+    color: var(--footer-link-hover);
+}
+
+.footer-bottom > p,
+.footer-legal p,
+.footer-legal-links a,
+.footer-region {
+    color: var(--footer-text);
+}
+
+.footer-bottom a:hover,
+.footer-legal-links a:hover {
+    color: var(--footer-link-hover);
+}
+
+.footer-region {
+    border-left-color: var(--footer-border);
+}
+
+/* ==================================================
+   UTILITY CLASSES (DRY)
+   ================================================== */
+
+.bg-light {
+    background-color: var(--theme-bg-secondary) !important;
+}
+
+.bg-dark {
+    background-color: var(--theme-bg-primary) !important;
+}
+
+.text-secondary,
+.text-muted {
+    color: var(--theme-text-secondary) !important;
+}
+
+.text-white {
+    color: var(--apple-white) !important;
+}
+
+.text-dark {
+    color: var(--theme-text-primary) !important;
+}
+
+/* ==================================================
+   MOBILE OPTIMIZATIONS (DRY)
+   ================================================== */
+
+@media (max-width: 734px) {
+    .navbar-toggler:hover {
+        background-color: var(--theme-hover);
+    }
+
+    .navbar-toggler-icon {
+        transition: opacity var(--apple-duration-fast) var(--apple-easing);
+    }
+
+    /* Dark theme mobile navbar icon */
+    [data-theme="dark"] .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28245, 245, 247, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* Light theme mobile navbar icon */
+    [data-theme="light"] .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2829, 29, 31, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+}
+
+/* ==================================================
+   THEME TRANSITIONS (DRY)
+   ================================================== */
+
+.apple-theme-transition,
+.apple-theme-transition *,
+.apple-theme-transition *:before,
+.apple-theme-transition *:after {
+    transition: background-color var(--apple-duration-medium) var(--apple-easing),
+    color var(--apple-duration-medium) var(--apple-easing),
+    border-color var(--apple-duration-medium) var(--apple-easing),
+    box-shadow var(--apple-duration-medium) var(--apple-easing) !important;
+}
+
+/* ==================================================
+   ACCESSIBILITY (DRY)
+   ================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .theme-toggle svg,
+    .apple-theme-transition *,
+    .theme-toggle {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .card,
+    .service-card {
+        border-width: 2px;
+        border-color: var(--theme-text-primary);
+    }
+
+    .btn {
+        border-width: 2px;
+    }
+
+    .theme-toggle:focus-visible {
+        outline-width: 3px;
+    }
+
+    --theme-text-secondary: var(--theme-text-primary);
+}
+
+/* ==================================================
+   SYSTEM PREFERENCE INDICATORS (DRY)
+   ================================================== */
+
+/* Subtle indicator when following system preference */
+.theme-toggle::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity var(--apple-duration-medium) var(--apple-easing);
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-theme="dark"] .theme-toggle::after {
+        background: var(--apple-green);
+        opacity: 0.6;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    [data-theme="light"] .theme-toggle::after {
+        background: #ff9f0a;
+        opacity: 0.6;
+    }
+}
+
+/* ==================================================
+   PRINT STYLES (DRY)
+   ================================================== */
+
+@media print {
+    .theme-toggle,
+    .hero-scroll-indicator,
+    .cta-buttons {
+        display: none !important;
+    }
+
+    body,
+    .card,
+    .service-card {
+        background: white !important;
+        color: black !important;
+        border-color: #cccccc !important;
+        box-shadow: none !important;
+    }
+
+    .navbar {
+        background: white !important;
+        box-shadow: none !important;
+    }
+}
+
+/* ==================================================
+   HOVER STATES (DRY)
+   ================================================== */
+
+@media (hover: hover) and (pointer: fine) {
+    .theme-toggle:hover {
+        transform: scale(1.05);
+    }
+
+    .theme-toggle:hover svg {
+        transform: scale(1.1) rotate(10deg);
+    }
+
+    .service-card:hover .service-title {
+        color: var(--theme-blue);
+    }
+
+    .btn:hover {
+        transform: translateY(-1px);
+    }
+}
+
+/* ==================================================
+   RIPPLE ANIMATION (DRY)
+   ================================================== */
+
+@keyframes apple-ripple {
+    to {
+        width: 40px;
+        height: 40px;
+        opacity: 0;
+    }
+}
+
+/* ==================================================
+   COMPONENT-SPECIFIC OVERRIDES (DRY)
+   ================================================== */
+
+/* Contact CTA specific styles */
+.contact-cta .btn-light {
+    background: var(--apple-light-gray);
+    color: var(--apple-dark-gray);
+}
+
+.contact-cta .btn-light:hover {
+    background: #e8e8ed;
+    color: var(--apple-dark-gray);
+}
+
+.contact-cta .btn-secondary {
+    background: transparent;
+    color: var(--apple-light-gray);
+    border-color: var(--apple-light-gray);
+}
+
+.contact-cta .btn-secondary:hover {
+    background: var(--apple-light-gray);
+    color: var(--apple-dark-gray);
+}
+
+/* Hero section text gradient (theme-aware) */
+.text-gradient {
+    background: linear-gradient(90deg, var(--apple-green) 0%, var(--theme-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ==================================================
+   RESPONSIVE DESIGN TOKENS (DRY)
+   ================================================== */
+
+@media (min-width: 735px) and (max-width: 1067px) {
+    :root {
+        --apple-spacing-section: 80px;
+        --apple-spacing-card: 36px;
+    }
+}
+
+@media (max-width: 734px) {
+    :root {
+        --apple-spacing-section: 60px;
+        --apple-spacing-card: 32px;
+    }
+
+    .hero-bg {
+        background-attachment: scroll;
+    }
+}
+
+@media (min-width: 1441px) {
+    :root {
+        --apple-spacing-section: 120px;
+        --apple-spacing-card: 48px;
+    }
+}

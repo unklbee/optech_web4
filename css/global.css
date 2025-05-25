@@ -1,5 +1,129 @@
 /* global.css start */
 
+/* Apple Theme System - DRY CSS Architecture */
+
+/* ==================================================
+   CSS CUSTOM PROPERTIES (DRY Color System)
+   ================================================== */
+
+:root {
+    /* Apple Color Palette */
+    --apple-white: #ffffff;
+    --apple-light-gray: #f5f5f7;
+    --apple-dark-gray: #1d1d1f;
+    --apple-black: #000000;
+    --apple-text-secondary: #86868b;
+    --apple-text-tertiary: #a1a1a6;
+    --apple-blue: #0071e3;
+    --apple-blue-hover: #0077ed;
+    --apple-blue-dark: #0984ff;
+    --apple-green: #30d158;
+    --apple-separator-light: rgba(0, 0, 0, 0.08);
+    --apple-separator-dark: rgba(255, 255, 255, 0.08);
+    --apple-hover-light: rgba(0, 0, 0, 0.04);
+    --apple-hover-dark: rgba(255, 255, 255, 0.08);
+    --apple-card-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --apple-card-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    /* Apple Timing */
+    --apple-easing: cubic-bezier(0.4, 0, 0.6, 1);
+    --apple-duration-fast: 0.2s;
+    --apple-duration-medium: 0.3s;
+    --apple-duration-slow: 0.4s;
+
+    /* Apple Spacing */
+    --apple-spacing-xs: 8px;
+    --apple-spacing-sm: 16px;
+    --apple-spacing-md: 24px;
+    --apple-spacing-lg: 32px;
+    --apple-spacing-xl: 48px;
+    --apple-spacing-xxl: 64px;
+
+    /* Apple Radius */
+    --apple-radius-sm: 8px;
+    --apple-radius-md: 12px;
+    --apple-radius-lg: 18px;
+    --apple-radius-full: 980px;
+}
+
+/* ==================================================
+   THEME CONFIGURATION (DRY)
+   ================================================== */
+
+/* Light Theme Variables */
+[data-theme="light"] {
+    color-scheme: light;
+
+    /* Semantic Colors */
+    --theme-bg-primary: var(--apple-white);
+    --theme-bg-secondary: var(--apple-light-gray);
+    --theme-text-primary: var(--apple-dark-gray);
+    --theme-text-secondary: var(--apple-text-secondary);
+    --theme-text-tertiary: var(--apple-text-tertiary);
+
+    /* Interactive Colors */
+    --theme-hover: var(--apple-hover-light);
+    --theme-separator: var(--apple-separator-light);
+    --theme-blue: var(--apple-blue);
+    --theme-blue-hover: var(--apple-blue-hover);
+
+    /* Navbar */
+    --navbar-bg: rgba(255, 255, 255, 0.95);
+    --navbar-bg-scrolled: rgba(255, 255, 255, 0.95);
+    --navbar-border: var(--apple-separator-light);
+    --navbar-text: var(--apple-dark-gray);
+
+    /* Cards */
+    --card-bg: var(--apple-white);
+    --card-border: transparent;
+    --card-shadow: var(--apple-card-shadow);
+    --card-shadow-hover: var(--apple-card-shadow-hover);
+
+    /* Footer */
+    --footer-bg: var(--apple-light-gray);
+    --footer-text: var(--apple-text-secondary);
+    --footer-link: var(--apple-text-secondary);
+    --footer-link-hover: var(--apple-blue);
+    --footer-border: #d2d2d7;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+    color-scheme: dark;
+
+    /* Semantic Colors */
+    --theme-bg-primary: var(--apple-black);
+    --theme-bg-secondary: var(--apple-dark-gray);
+    --theme-text-primary: var(--apple-light-gray);
+    --theme-text-secondary: var(--apple-text-secondary);
+    --theme-text-tertiary: var(--apple-text-tertiary);
+
+    /* Interactive Colors */
+    --theme-hover: var(--apple-hover-dark);
+    --theme-separator: var(--apple-separator-dark);
+    --theme-blue: var(--apple-blue-dark);
+    --theme-blue-hover: #0a84ff;
+
+    /* Navbar */
+    --navbar-bg: rgba(0, 0, 0, 0.8);
+    --navbar-bg-scrolled: rgba(0, 0, 0, 0.95);
+    --navbar-border: rgba(255, 255, 255, 0.08);
+    --navbar-text: var(--apple-light-gray);
+
+    /* Cards */
+    --card-bg: var(--apple-dark-gray);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: 0 8px 25px rgba(255, 255, 255, 0.1);
+
+    /* Footer */
+    --footer-bg: var(--apple-dark-gray);
+    --footer-text: var(--apple-text-tertiary);
+    --footer-link: var(--apple-text-tertiary);
+    --footer-link-hover: var(--theme-blue);
+    --footer-border: #424245;
+}
+
 /* ==================================================
    APPLE.COM AUTHENTIC STYLING - BASE RESET
    ================================================== */
@@ -24,10 +148,12 @@ body {
     line-height: 1.47059;
     font-weight: 400;
     letter-spacing: -0.022em;
-    color: #1d1d1f;
-    background-color: #ffffff;
+    color: var(--theme-text-primary);
+    background-color: var(--theme-bg-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color var(--apple-duration-medium) var(--apple-easing),
+    color var(--apple-duration-medium) var(--apple-easing);
 }
 
 /* Apple's precise focus states */
@@ -50,7 +176,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     line-height: 1.08349;
     letter-spacing: -0.003em;
-    color: #1d1d1f;
+    color: var(--theme-text-primary);
     margin: 0;
 }
 
@@ -126,11 +252,11 @@ h2 {
    ================================================== */
 
 .navbar {
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: var(--navbar-bg);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.6, 1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    transition: all var(--apple-duration-medium) var(--apple-easing);
+    border-bottom: 1px solid var(--navbar-border);
     padding: 0;
     min-height: 44px;
     position: sticky;
@@ -139,10 +265,10 @@ h2 {
 }
 
 .navbar.navbar-scrolled {
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: var(--navbar-bg-scrolled);
     backdrop-filter: saturate(180%) blur(30px);
     -webkit-backdrop-filter: saturate(180%) blur(30px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom-color: var(--navbar-border);
 }
 
 .navbar .container {

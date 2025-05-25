@@ -662,6 +662,310 @@ class AppleLazyLoader {
 }
 
 // ==================================================
+// APPLE-STYLE DARK MODE CONTROLLER
+// ==================================================
+
+class AppleDarkModeController {
+    constructor() {
+        this.themeKey = 'techfix-pro-theme';
+        this.currentTheme = this.getStoredTheme();
+        this.toggleButton = null;
+        this.prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+        this.init();
+    }
+
+    init() {
+        this.createToggleButton();
+        this.applyTheme(this.currentTheme);
+        this.setupEventListeners();
+        this.setupSystemThemeListener();
+    }
+
+    getStoredTheme() {
+        try {
+            const stored = localStorage.getItem(this.themeKey);
+            if (stored) {
+                return stored;
+            }
+        } catch (error) {
+            console.warn('Could not access localStorage for theme:', error);
+        }
+
+        return this.prefersDark.matches ? 'dark' : 'light';
+    }
+
+    createToggleButton() {
+        this.toggleButton = document.createElement('button');
+        this.toggleButton.className = 'theme-toggle nav-link';
+        this.toggleButton.setAttribute('aria-label', 'Toggle dark mode');
+        this.toggleButton.setAttribute('title', 'Toggle appearance');
+        this.toggleButton.innerHTML = this.getToggleIcon();
+
+        this.toggleButton.style.cssText = `
+            background: none;
+            border: none;
+            padding: 0 10px;
+            margin: 0 4px;
+            border-radius: 18px;
+            transition: background-color 0.3s ${APPLE_EASING};
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 36px;
+            min-width: 36px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        `;
+
+        const navbar = document.querySelector('.navbar-nav');
+        if (navbar) {
+            const lastNavItem = navbar.lastElementChild;
+            if (lastNavItem) {
+                navbar.insertBefore(this.toggleButton, lastNavItem);
+            } else {
+                navbar.appendChild(this.toggleButton);
+            }
+        }
+
+        this.setupToggleButtonEffects();
+    }
+
+    getToggleIcon() {
+        const isDark = this.currentTheme === 'dark';
+
+        if (isDark) {
+            return `
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                </svg>
+            `;
+        } else {
+            return `
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+                </svg>
+            `;
+        }
+    }
+
+    setupToggleButtonEffects() {
+        this.toggleButton.addEventListener('mouseenter', () => {
+            if (!isTouchDevice()) {
+                this.toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.04)';
+            }
+        });
+
+        this.toggleButton.addEventListener('mouseleave', () => {
+            if (!isTouchDevice()) {
+                this.toggleButton.style.backgroundColor = '';
+            }
+        });
+
+        if (isTouchDevice()) {
+            this.toggleButton.addEventListener('touchstart', () => {
+                this.toggleButton.style.transform = 'scale(0.95)';
+                this.toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.08)';
+            }, {passive: true});
+
+            this.toggleButton.addEventListener('touchend', () => {
+                this.toggleButton.style.transform = 'scale(1)';
+                setTimeout(() => {
+                    this.toggleButton.style.backgroundColor = '';
+                }, 150);
+            }, {passive: true});
+        }
+
+        this.toggleButton.addEventListener('click', () => {
+            this.addClickRipple();
+        });
+    }
+
+    addClickRipple() {
+        const ripple = document.createElement('div');
+        ripple.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            animation: ripple 0.6s ease-out;
+        `;
+
+        if (!document.querySelector('#ripple-keyframes')) {
+            const style = document.createElement('style');
+            style.id = 'ripple-keyframes';
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        width: 40px;
+                        height: 40px;
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        this.toggleButton.appendChild(ripple);
+
+        setTimeout(() => {
+            if (ripple.parentNode) {
+                ripple.parentNode.removeChild(ripple);
+            }
+        }, 600);
+    }
+
+    setupEventListeners() {
+        this.toggleButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.toggleTheme();
+        });
+
+        this.toggleButton.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.toggleTheme();
+            }
+        });
+    }
+
+    setupSystemThemeListener() {
+        this.prefersDark.addEventListener('change', (e) => {
+            const storedTheme = this.getStoredTheme();
+            if (!localStorage.getItem(this.themeKey)) {
+                const newTheme = e.matches ? 'dark' : 'light';
+                this.applyTheme(newTheme);
+                this.currentTheme = newTheme;
+                this.updateToggleIcon();
+            }
+        });
+    }
+
+    toggleTheme() {
+        const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+        this.setTheme(newTheme);
+        this.trackThemeChange(newTheme);
+    }
+
+    setTheme(theme) {
+        this.currentTheme = theme;
+        this.applyTheme(theme);
+        this.saveTheme(theme);
+        this.updateToggleIcon();
+
+        document.dispatchEvent(new CustomEvent('themeChanged', {
+            detail: {theme: theme}
+        }));
+    }
+
+    applyTheme(theme) {
+        const html = document.documentElement;
+        const body = document.body;
+
+        html.classList.remove('light-theme', 'dark-theme');
+        body.classList.remove('light-theme', 'dark-theme');
+
+        html.classList.add(`${theme}-theme`);
+        body.classList.add(`${theme}-theme`);
+
+        html.setAttribute('data-theme', theme);
+        body.setAttribute('data-theme', theme);
+
+        this.updateMetaThemeColor(theme);
+        this.addThemeTransition();
+    }
+
+    updateMetaThemeColor(theme) {
+        let themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
+        if (!themeColorMeta) {
+            themeColorMeta = document.createElement('meta');
+            themeColorMeta.name = 'theme-color';
+            document.head.appendChild(themeColorMeta);
+        }
+
+        const themeColors = {
+            light: '#f5f5f7',
+            dark: '#000000'
+        };
+
+        themeColorMeta.content = themeColors[theme];
+    }
+
+    addThemeTransition() {
+        const transitionClass = 'theme-transition';
+
+        document.body.classList.add(transitionClass);
+
+        if (!document.querySelector('#theme-transition-styles')) {
+            const style = document.createElement('style');
+            style.id = 'theme-transition-styles';
+            style.textContent = `
+                .theme-transition,
+                .theme-transition *,
+                .theme-transition *:before,
+                .theme-transition *:after {
+                    transition: background-color 0.3s ${APPLE_EASING},
+                                color 0.3s ${APPLE_EASING},
+                                border-color 0.3s ${APPLE_EASING},
+                                box-shadow 0.3s ${APPLE_EASING} !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        setTimeout(() => {
+            document.body.classList.remove(transitionClass);
+        }, 300);
+    }
+
+    updateToggleIcon() {
+        if (this.toggleButton) {
+            this.toggleButton.innerHTML = this.getToggleIcon();
+
+            const newLabel = this.currentTheme === 'dark'
+                ? 'Switch to light mode'
+                : 'Switch to dark mode';
+            this.toggleButton.setAttribute('aria-label', newLabel);
+        }
+    }
+
+    saveTheme(theme) {
+        try {
+            localStorage.setItem(this.themeKey, theme);
+        } catch (error) {
+            console.warn('Could not save theme preference:', error);
+        }
+    }
+
+    trackThemeChange(theme) {
+        console.log(`🍎 Theme changed to: ${theme}`);
+
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'theme_change', {
+                'event_category': 'user_preference',
+                'event_label': theme,
+                'value': theme === 'dark' ? 1 : 0
+            });
+        }
+    }
+
+    getCurrentTheme() {
+        return this.currentTheme;
+    }
+
+    isDarkMode() {
+        return this.currentTheme === 'dark';
+    }
+}
+
+// ==================================================
 // INITIALIZATION WITH APPLE TIMING
 // ==================================================
 
