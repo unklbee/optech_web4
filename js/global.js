@@ -965,6 +965,8 @@ class AppleDarkModeController {
     }
 }
 
+
+
 // ==================================================
 // INITIALIZATION WITH APPLE TIMING
 // ==================================================
