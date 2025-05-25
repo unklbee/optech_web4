@@ -1,4 +1,4 @@
-// js/pages/home.js - Updated to use modular system
+// js/pages/home.js - Fixed version with no duplicate variable declarations
 
 /**
  * Apple.com Style Home Page JavaScript - Modular Version
@@ -34,14 +34,13 @@ class AppleHeroController {
     }
 
     cacheElements() {
-        const { $: select, $: selectAll } = window.AppleGlobal;
         return {
-            section: select('.hero-section'),
-            title: select('.hero-title'),
-            subtitle: select('.hero-subtitle'),
-            cta: select('.hero-cta'),
-            background: select('.hero-bg'),
-            scrollIndicator: select('.hero-scroll-indicator')
+            section: window.AppleGlobal.select('.hero-section'),
+            title: window.AppleGlobal.select('.hero-title'),
+            subtitle: window.AppleGlobal.select('.hero-subtitle'),
+            cta: window.AppleGlobal.select('.hero-cta'),
+            background: window.AppleGlobal.select('.hero-bg'),
+            scrollIndicator: window.AppleGlobal.select('.hero-scroll-indicator')
         };
     }
 
@@ -202,10 +201,9 @@ class AppleServicesController {
     }
 
     cacheElements() {
-        const { $, $ } = window.AppleGlobal;
         return {
-            section: $('.services-preview'),
-            cards: Array.from($('.service-card') || [])
+            section: window.AppleGlobal.select('.services-preview'),
+            cards: Array.from(window.AppleGlobal.selectAll('.service-card') || [])
         };
     }
 
@@ -347,12 +345,11 @@ class AppleAboutController {
     }
 
     cacheElements() {
-        const { $, $ } = window.AppleGlobal;
         return {
-            section: $('.about-snippet'),
-            content: $('.about-content'),
-            image: $('.about-snippet img'),
-            featureItems: Array.from($('.feature-list li') || [])
+            section: window.AppleGlobal.select('.about-snippet'),
+            content: window.AppleGlobal.select('.about-content'),
+            image: window.AppleGlobal.select('.about-snippet img'),
+            featureItems: Array.from(window.AppleGlobal.selectAll('.feature-list li') || [])
         };
     }
 
@@ -474,10 +471,9 @@ class AppleCTAController {
     }
 
     cacheElements() {
-        const { $, $ } = window.AppleGlobal;
         return {
-            section: $('.contact-cta'),
-            buttons: $('.contact-cta .btn')
+            section: window.AppleGlobal.select('.contact-cta'),
+            buttons: window.AppleGlobal.selectAll('.contact-cta .btn')
         };
     }
 
@@ -504,13 +500,11 @@ class AppleCTAController {
     }
 
     animateCTA() {
-        const { $, entranceAnimation } = window.AppleGlobal;
-
         const title = this.elements.section.querySelector('h2');
         const subtitle = this.elements.section.querySelector('.lead');
         const elements = [title, subtitle, ...this.elements.buttons].filter(el => el);
 
-        entranceAnimation(elements, {
+        window.AppleGlobal.entranceAnimation(elements, {
             duration: 600,
             stagger: 200
         });
@@ -607,10 +601,8 @@ class ApplePerformanceMonitor {
     }
 
     optimizeAnimations() {
-        const { $, setStyles } = window.AppleGlobal;
-
         // Add will-change for animated elements
-        const animatedElements = $([
+        const animatedElements = window.AppleGlobal.selectAll([
             '.hero-title',
             '.hero-subtitle',
             '.service-card',
@@ -619,13 +611,13 @@ class ApplePerformanceMonitor {
         ].join(','));
 
         animatedElements.forEach(el => {
-            setStyles(el, { willChange: 'transform, opacity' });
+            window.AppleGlobal.setStyles(el, { willChange: 'transform, opacity' });
         });
 
         // Clean up will-change after animations
         setTimeout(() => {
             animatedElements.forEach(el => {
-                setStyles(el, { willChange: 'auto' });
+                window.AppleGlobal.setStyles(el, { willChange: 'auto' });
             });
         }, 3000);
     }
