@@ -32,6 +32,24 @@
     <!-- CSS DRY theme system (tambahan) -->
     <link rel="stylesheet" href="css/theme.css">
 
+    <!-- Early theme detection (opsional, bisa skip jika pakai auto-init) -->
+    <script>
+        (function() {
+            try {
+                const stored = localStorage.getItem('techfix-pro-theme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = stored || (prefersDark ? 'dark' : 'light');
+
+                [document.documentElement, document.body].forEach(el => {
+                    if (el) {
+                        el.setAttribute('data-theme', theme);
+                        el.classList.add(`${theme}-theme`);
+                    }
+                });
+            } catch (e) {}
+        })();
+    </script>
+
     <!-- Preload Apple System Fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>

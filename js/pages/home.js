@@ -34,14 +34,14 @@ class AppleHeroController {
     }
 
     cacheElements() {
-        const { $ } = window.AppleGlobal;
+        const { $: select, $: selectAll } = window.AppleGlobal;
         return {
-            section: $('.hero-section'),
-            title: $('.hero-title'),
-            subtitle: $('.hero-subtitle'),
-            cta: $('.hero-cta'),
-            background: $('.hero-bg'),
-            scrollIndicator: $('.hero-scroll-indicator')
+            section: select('.hero-section'),
+            title: select('.hero-title'),
+            subtitle: select('.hero-subtitle'),
+            cta: select('.hero-cta'),
+            background: select('.hero-bg'),
+            scrollIndicator: select('.hero-scroll-indicator')
         };
     }
 
@@ -202,16 +202,20 @@ class AppleServicesController {
     }
 
     cacheElements() {
-        const { $, $$ } = window.AppleGlobal;
+        const { $, $ } = window.AppleGlobal;
         return {
             section: $('.services-preview'),
-            cards: $$('.service-card')
+            cards: Array.from($('.service-card') || [])
         };
     }
 
     init() {
-        this.setupCardAnimations();
-        this.setupCardInteractions();
+        try {
+            this.setupCardAnimations();
+            this.setupCardInteractions();
+        } catch (error) {
+            console.error('🍎 Error initializing services controller:', error);
+        }
     }
 
     setupCardAnimations() {
@@ -232,6 +236,11 @@ class AppleServicesController {
 
     setupCardInteractions() {
         const { addEvent, isTouchDevice, APPLE_EASING } = window.AppleGlobal;
+
+        if (!this.elements.cards || this.elements.cards.length === 0) {
+            console.warn('🍎 No service cards found for interaction setup');
+            return;
+        }
 
         this.elements.cards.forEach(card => {
             const icon = card.querySelector('.service-icon');
@@ -338,18 +347,22 @@ class AppleAboutController {
     }
 
     cacheElements() {
-        const { $, $$ } = window.AppleGlobal;
+        const { $, $ } = window.AppleGlobal;
         return {
             section: $('.about-snippet'),
             content: $('.about-content'),
             image: $('.about-snippet img'),
-            featureItems: $$('.feature-list li')
+            featureItems: Array.from($('.feature-list li') || [])
         };
     }
 
     init() {
-        this.setupScrollAnimation();
-        this.setupImageInteraction();
+        try {
+            this.setupScrollAnimation();
+            this.setupImageInteraction();
+        } catch (error) {
+            console.error('🍎 Error initializing about controller:', error);
+        }
     }
 
     setupScrollAnimation() {
@@ -461,7 +474,7 @@ class AppleCTAController {
     }
 
     cacheElements() {
-        const { $ } = window.AppleGlobal;
+        const { $, $ } = window.AppleGlobal;
         return {
             section: $('.contact-cta'),
             buttons: $('.contact-cta .btn')
@@ -469,8 +482,12 @@ class AppleCTAController {
     }
 
     init() {
-        this.setupScrollAnimation();
-        this.setupButtonInteractions();
+        try {
+            this.setupScrollAnimation();
+            this.setupButtonInteractions();
+        } catch (error) {
+            console.error('🍎 Error initializing CTA controller:', error);
+        }
     }
 
     setupScrollAnimation() {
@@ -489,9 +506,9 @@ class AppleCTAController {
     animateCTA() {
         const { $, entranceAnimation } = window.AppleGlobal;
 
-        const title = $(this.elements.section, 'h2');
-        const subtitle = $(this.elements.section, '.lead');
-        const elements = [title, subtitle, ...Array.from(this.elements.buttons)].filter(el => el);
+        const title = this.elements.section.querySelector('h2');
+        const subtitle = this.elements.section.querySelector('.lead');
+        const elements = [title, subtitle, ...this.elements.buttons].filter(el => el);
 
         entranceAnimation(elements, {
             duration: 600,
@@ -501,6 +518,11 @@ class AppleCTAController {
 
     setupButtonInteractions() {
         const { addEvent, isTouchDevice, APPLE_EASING } = window.AppleGlobal;
+
+        if (!this.elements.buttons || this.elements.buttons.length === 0) {
+            console.warn('🍎 No CTA buttons found for interaction setup');
+            return;
+        }
 
         this.elements.buttons.forEach(button => {
             // Desktop hover effects
@@ -575,9 +597,13 @@ class ApplePerformanceMonitor {
     }
 
     init() {
-        this.optimizeAnimations();
-        this.setupVisibilityHandling();
-        this.monitorInteractions();
+        try {
+            this.optimizeAnimations();
+            this.setupVisibilityHandling();
+            this.monitorInteractions();
+        } catch (error) {
+            console.error('🍎 Error initializing performance monitor:', error);
+        }
     }
 
     optimizeAnimations() {
