@@ -1,0 +1,781 @@
+/* home.css start */
+
+/* ==================================================
+   APPLE.COM HERO SECTION - AUTHENTIC STYLING
+   ================================================== */
+
+.hero-section {
+    background: #000000;
+    color: #f5f5f7;
+    padding: 44px 0 0 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+            linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%),
+            url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2620&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.hero-title {
+    font-size: 64px;
+    line-height: 1.0625;
+    font-weight: 600;
+    letter-spacing: -0.009em;
+    color: #f5f5f7;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.hero-subtitle {
+    font-size: 28px;
+    line-height: 1.14286;
+    font-weight: 400;
+    letter-spacing: 0.007em;
+    color: #a1a1a6;
+    margin-bottom: 48px;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-cta {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.hero-cta .btn {
+    margin: 0 12px 16px 12px;
+    min-width: 120px;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, #30d158 0%, #007aff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Apple's scroll indicator */
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: fadeInBounce 2s ease-out 1.5s forwards;
+}
+
+.scroll-arrow {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #86868b;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+    animation: bounce 2s infinite;
+}
+
+@keyframes fadeInBounce {
+    0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    100% { opacity: 0.6; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% { transform: translateX(-50%) translateY(0) rotate(45deg); }
+    40%, 43% { transform: translateX(-50%) translateY(-8px) rotate(45deg); }
+    70% { transform: translateX(-50%) translateY(-4px) rotate(45deg); }
+    90% { transform: translateX(-50%) translateY(-2px) rotate(45deg); }
+}
+
+/* Mobile hero adjustments */
+@media (max-width: 734px) {
+    .hero-title {
+        font-size: 40px;
+        line-height: 1.1;
+        margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+        font-size: 21px;
+        line-height: 1.381;
+        margin-bottom: 32px;
+    }
+
+    .hero-cta {
+        margin-bottom: 60px;
+    }
+
+    .hero-cta .btn {
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto 16px auto;
+    }
+
+    .hero-bg {
+        background-attachment: scroll;
+    }
+}
+
+@media (min-width: 735px) and (max-width: 1067px) {
+    .hero-title {
+        font-size: 56px;
+    }
+
+    .hero-subtitle {
+        font-size: 24px;
+    }
+}
+
+/* ==================================================
+   APPLE SERVICES SECTION
+   ================================================== */
+
+.services-preview {
+    background: #f5f5f7;
+    padding: 100px 0;
+}
+
+.services-preview .section-title {
+    font-size: 48px;
+    line-height: 1.08349;
+    font-weight: 600;
+    letter-spacing: -0.003em;
+    color: #1d1d1f;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.services-preview .section-subtitle {
+    font-size: 21px;
+    line-height: 1.381;
+    font-weight: 400;
+    letter-spacing: 0.011em;
+    color: #86868b;
+    text-align: center;
+    margin-bottom: 80px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Apple-style service cards */
+.service-card {
+    background: #ffffff;
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.6, 1);
+    overflow: hidden;
+    height: 100%;
+}
+
+.service-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+}
+
+.service-card .card-body {
+    padding: 40px 32px;
+    text-align: center;
+}
+
+.service-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 113, 227, 0.1);
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.service-card:hover .service-icon {
+    background: rgba(0, 113, 227, 0.15);
+    transform: scale(1.05);
+}
+
+.service-icon svg {
+    color: #0071e3;
+    width: 32px;
+    height: 32px;
+}
+
+.service-title {
+    font-size: 24px;
+    line-height: 1.16667;
+    font-weight: 600;
+    letter-spacing: 0.009em;
+    color: #1d1d1f;
+    margin-bottom: 16px;
+}
+
+.service-description {
+    font-size: 17px;
+    line-height: 1.47059;
+    font-weight: 400;
+    letter-spacing: -0.022em;
+    color: #86868b;
+    margin-bottom: 24px;
+}
+
+.service-card .btn {
+    font-size: 14px;
+    padding: 8px 16px;
+    background: transparent;
+    color: #0071e3;
+    border: 1px solid #0071e3;
+}
+
+.service-card .btn:hover {
+    background: #0071e3;
+    color: #ffffff;
+}
+
+/* Mobile services adjustments */
+@media (max-width: 734px) {
+    .services-preview {
+        padding: 60px 0;
+    }
+
+    .services-preview .section-title {
+        font-size: 32px;
+        margin-bottom: 12px;
+    }
+
+    .services-preview .section-subtitle {
+        font-size: 19px;
+        margin-bottom: 60px;
+    }
+
+    .service-card .card-body {
+        padding: 32px 24px;
+    }
+
+    .service-title {
+        font-size: 21px;
+    }
+
+    .service-description {
+        font-size: 16px;
+    }
+}
+
+/* ==================================================
+   APPLE ABOUT SECTION
+   ================================================== */
+
+.about-snippet {
+    background: #ffffff;
+    padding: 100px 0;
+}
+
+.about-snippet .section-title {
+    font-size: 40px;
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: 0em;
+    color: #1d1d1f;
+    margin-bottom: 24px;
+}
+
+.about-snippet .lead {
+    font-size: 21px;
+    line-height: 1.381;
+    font-weight: 400;
+    letter-spacing: 0.011em;
+    color: #86868b;
+    margin-bottom: 32px;
+}
+
+.about-snippet img {
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.6, 1);
+    width: 100%;
+    height: auto;
+}
+
+.about-snippet img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Apple-style feature list */
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 32px 0;
+}
+
+.feature-list li {
+    font-size: 17px;
+    line-height: 1.47059;
+    font-weight: 400;
+    letter-spacing: -0.022em;
+    color: #1d1d1f;
+    padding: 12px 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.feature-list svg {
+    color: #30d158;
+    margin-top: 2px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.about-snippet .btn {
+    margin-top: 16px;
+}
+
+/* Mobile about adjustments */
+@media (max-width: 734px) {
+    .about-snippet {
+        padding: 60px 0;
+    }
+
+    .about-snippet .section-title {
+        font-size: 32px;
+        margin-bottom: 16px;
+    }
+
+    .about-snippet .lead {
+        font-size: 19px;
+        margin-bottom: 24px;
+    }
+
+    .feature-list li {
+        font-size: 16px;
+        padding: 8px 0;
+    }
+
+    /* Stack image above content on mobile */
+    .about-snippet .row {
+        flex-direction: column-reverse;
+    }
+
+    .about-snippet img {
+        margin-bottom: 40px;
+    }
+}
+
+/* ==================================================
+   APPLE CONTACT CTA SECTION
+   ================================================== */
+
+.contact-cta {
+    background: #000000;
+    color: #f5f5f7;
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+            radial-gradient(circle at 30% 20%, rgba(0, 122, 255, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 70% 80%, rgba(48, 209, 88, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.contact-cta h2 {
+    font-size: 48px;
+    line-height: 1.08349;
+    font-weight: 600;
+    letter-spacing: -0.003em;
+    color: #f5f5f7;
+    margin-bottom: 24px;
+}
+
+.contact-cta .lead {
+    font-size: 21px;
+    line-height: 1.381;
+    font-weight: 400;
+    letter-spacing: 0.011em;
+    color: #a1a1a6;
+    margin-bottom: 48px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    position: relative;
+    z-index: 2;
+}
+
+.contact-cta .btn {
+    margin: 0 12px 16px 12px;
+    min-width: 140px;
+}
+
+.contact-cta .btn-light {
+    background: #f5f5f7;
+    color: #1d1d1f;
+}
+
+.contact-cta .btn-light:hover {
+    background: #e8e8ed;
+    color: #1d1d1f;
+}
+
+.contact-cta .btn-secondary {
+    background: transparent;
+    color: #f5f5f7;
+    border: 1px solid #f5f5f7;
+}
+
+.contact-cta .btn-secondary:hover {
+    background: #f5f5f7;
+    color: #1d1d1f;
+}
+
+/* Mobile contact CTA adjustments */
+@media (max-width: 734px) {
+    .contact-cta {
+        padding: 60px 0;
+    }
+
+    .contact-cta h2 {
+        font-size: 32px;
+        margin-bottom: 16px;
+    }
+
+    .contact-cta .lead {
+        font-size: 19px;
+        margin-bottom: 32px;
+    }
+
+    .contact-cta .btn {
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto 16px auto;
+    }
+}
+
+/* ==================================================
+   APPLE ANIMATION SYSTEM
+   ================================================== */
+
+/* Entrance animations with Apple's timing */
+.animate-fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+}
+
+.animation-delay-200 {
+    animation-delay: 0.2s;
+}
+
+.animation-delay-400 {
+    animation-delay: 0.4s;
+}
+
+.animation-delay-600 {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apple's staggered animation for service cards */
+.service-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.service-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.service-card:nth-child(1) { transition-delay: 0.1s; }
+.service-card:nth-child(2) { transition-delay: 0.2s; }
+.service-card:nth-child(3) { transition-delay: 0.3s; }
+.service-card:nth-child(4) { transition-delay: 0.4s; }
+
+/* About section animations */
+.about-content {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.about-content.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.about-snippet img {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.about-snippet img.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ==================================================
+   APPLE PERFORMANCE OPTIMIZATIONS
+   ================================================== */
+
+/* GPU acceleration for smooth animations */
+.hero-section,
+.service-card,
+.about-snippet img,
+.contact-cta {
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Optimize background images */
+.hero-bg {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* ==================================================
+   APPLE DARK MODE ENHANCEMENTS
+   ================================================== */
+
+@media (prefers-color-scheme: dark) {
+    .services-preview {
+        background: #000000;
+    }
+
+    .services-preview .section-title {
+        color: #f5f5f7;
+    }
+
+    .services-preview .section-subtitle {
+        color: #a1a1a6;
+    }
+
+    .service-card {
+        background: #1d1d1f;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .service-title {
+        color: #f5f5f7;
+    }
+
+    .service-description {
+        color: #a1a1a6;
+    }
+
+    .service-card .btn {
+        color: #0984ff;
+        border-color: #0984ff;
+    }
+
+    .service-card .btn:hover {
+        background: #0984ff;
+        color: #ffffff;
+    }
+
+    .about-snippet {
+        background: #000000;
+    }
+
+    .about-snippet .section-title {
+        color: #f5f5f7;
+    }
+
+    .about-snippet .lead {
+        color: #a1a1a6;
+    }
+
+    .feature-list li {
+        color: #f5f5f7;
+    }
+}
+
+/* ==================================================
+   APPLE REDUCED MOTION SUPPORT
+   ================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-bg {
+        background-attachment: scroll;
+    }
+
+    .animate-fade-up,
+    .service-card,
+    .about-content,
+    .about-snippet img {
+        opacity: 1;
+        transform: none;
+        animation: none;
+        transition: none;
+    }
+
+    .scroll-arrow {
+        animation: none;
+    }
+
+    .hero-scroll-indicator {
+        animation: none;
+        opacity: 0.6;
+    }
+}
+
+/* ==================================================
+   APPLE HIGH CONTRAST MODE
+   ================================================== */
+
+@media (prefers-contrast: high) {
+    .service-card {
+        border: 2px solid #1d1d1f;
+    }
+
+    .service-card .btn {
+        border-width: 2px;
+    }
+
+    .hero-subtitle,
+    .services-preview .section-subtitle,
+    .about-snippet .lead,
+    .contact-cta .lead {
+        color: #424245;
+    }
+}
+
+/* ==================================================
+   APPLE PRINT OPTIMIZATIONS
+   ================================================== */
+
+@media print {
+    .hero-section {
+        background: #ffffff;
+        color: #000000;
+        padding: 2rem 0;
+        min-height: auto;
+    }
+
+    .hero-bg {
+        display: none;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+        color: #000000;
+    }
+
+    .services-preview,
+    .about-snippet,
+    .contact-cta {
+        padding: 2rem 0;
+        background: #ffffff;
+        color: #000000;
+    }
+
+    .service-card {
+        box-shadow: none;
+        border: 1px solid #cccccc;
+        break-inside: avoid;
+        margin-bottom: 1rem;
+    }
+
+    .hero-scroll-indicator,
+    .cta-buttons {
+        display: none;
+    }
+
+    .about-snippet img {
+        max-width: 50%;
+        float: right;
+        margin-left: 1rem;
+    }
+}
+
+/* ==================================================
+   APPLE TABLET OPTIMIZATIONS
+   ================================================== */
+
+@media (min-width: 735px) and (max-width: 1067px) {
+    .services-preview {
+        padding: 80px 0;
+    }
+
+    .about-snippet {
+        padding: 80px 0;
+    }
+
+    .contact-cta {
+        padding: 80px 0;
+    }
+
+    .service-card .card-body {
+        padding: 36px 28px;
+    }
+}
+
+/* ==================================================
+   APPLE LARGE DISPLAY OPTIMIZATIONS
+   ================================================== */
+
+@media (min-width: 1441px) {
+    .hero-title {
+        font-size: 80px;
+        line-height: 1.05;
+    }
+
+    .hero-subtitle {
+        font-size: 32px;
+        line-height: 1.125;
+    }
+
+    .services-preview .section-title {
+        font-size: 56px;
+    }
+
+    .about-snippet .section-title {
+        font-size: 48px;
+    }
+
+    .contact-cta h2 {
+        font-size: 56px;
+    }
+}
+
+/* home.css end */
