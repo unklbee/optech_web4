@@ -1,0 +1,618 @@
+/* css/components/mega-menu.css */
+
+/* ==================================================
+   APPLE MEGA MENU SYSTEM - MOBILE-FIRST DESIGN
+   ================================================== */
+
+/* Variables extending the existing theme system */
+:root {
+    --mega-menu-item-height: 44px;
+    --mega-menu-submenu-height: 36px;
+    --mega-menu-border-radius: 12px;
+    --mega-menu-backdrop-opacity: 0.1;
+    --mega-menu-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --mega-menu-shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ==================================================
+   MEGA MENU CONTAINER UPDATES
+   ================================================== */
+
+/* Enhanced navbar to support mega menu */
+.apple-navbar {
+    background: var(--navbar-bg);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--navbar-border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    height: var(--navbar-height);
+    transition: all var(--apple-duration-medium) var(--apple-easing);
+}
+
+.apple-navbar-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--apple-spacing-sm);
+    position: relative;
+}
+
+/* ==================================================
+   BRAND STYLING
+   ================================================== */
+
+.apple-navbar-brand {
+    font-size: 21px;
+    font-weight: 600;
+    color: var(--navbar-text);
+    text-decoration: none;
+    letter-spacing: -0.021em;
+    transition: color var(--apple-duration-fast) var(--apple-easing);
+}
+
+.apple-navbar-brand:hover {
+    color: var(--navbar-text);
+    text-decoration: none;
+}
+
+/* ==================================================
+   DESKTOP NAVIGATION (HIDDEN ON MOBILE)
+   ================================================== */
+
+.apple-navbar-nav {
+    display: none; /* Mobile-first: hidden by default */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.apple-nav-item {
+    position: relative;
+}
+
+.apple-nav-link {
+    display: flex;
+    align-items: center;
+    height: var(--navbar-height);
+    padding: 0 10px;
+    margin: 0 4px;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--navbar-text);
+    text-decoration: none;
+    border-radius: var(--apple-radius-lg);
+    transition: all var(--apple-duration-fast) var(--apple-easing);
+    position: relative;
+}
+
+.apple-nav-link:hover {
+    background: var(--theme-hover);
+    color: var(--navbar-text);
+    text-decoration: none;
+}
+
+.apple-nav-link:focus-visible {
+    outline: 2px solid var(--theme-blue);
+    outline-offset: 2px;
+}
+
+/* ==================================================
+   MOBILE TOGGLE BUTTON
+   ================================================== */
+
+.apple-navbar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin-left: auto;
+    background: none;
+    border: none;
+    border-radius: var(--apple-radius-lg);
+    transition: background var(--apple-duration-fast) var(--apple-easing);
+    cursor: pointer;
+}
+
+.apple-navbar-toggle:hover {
+    background: var(--theme-hover);
+}
+
+.apple-navbar-toggle:focus-visible {
+    outline: 2px solid var(--theme-blue);
+    outline-offset: 2px;
+}
+
+/* Toggle icon animation */
+.apple-navbar-toggle-icon {
+    width: 18px;
+    height: 18px;
+    position: relative;
+    transition: transform var(--apple-duration-medium) var(--apple-easing);
+}
+
+.apple-navbar-toggle-icon span {
+    display: block;
+    position: absolute;
+    height: 1px;
+    width: 18px;
+    background: var(--navbar-text);
+    border-radius: 1px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: all 0.25s var(--apple-easing);
+}
+
+.apple-navbar-toggle-icon span:nth-child(1) {
+    top: 3px;
+}
+
+.apple-navbar-toggle-icon span:nth-child(2) {
+    top: 8px;
+}
+
+.apple-navbar-toggle-icon span:nth-child(3) {
+    top: 13px;
+}
+
+/* Active state animation */
+.apple-navbar-toggle.active .apple-navbar-toggle-icon span:nth-child(1) {
+    top: 8px;
+    transform: rotate(135deg);
+}
+
+.apple-navbar-toggle.active .apple-navbar-toggle-icon span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+}
+
+.apple-navbar-toggle.active .apple-navbar-toggle-icon span:nth-child(3) {
+    top: 8px;
+    transform: rotate(-135deg);
+}
+
+/* ==================================================
+   MOBILE MENU (MOBILE-FIRST)
+   ================================================== */
+
+.apple-mobile-menu {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--theme-bg-primary);
+    transform: translateY(-100%);
+    transition: transform 0.4s var(--apple-easing);
+    overflow-y: auto;
+    z-index: 9998;
+    display: none;
+    -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
+}
+
+.apple-mobile-menu.active {
+    display: block;
+    transform: translateY(0);
+}
+
+.apple-mobile-menu-content {
+    padding: 0;
+    min-height: 100%;
+}
+
+/* Mobile navigation items */
+.apple-mobile-nav-item {
+    border-bottom: 1px solid var(--theme-separator);
+}
+
+.apple-mobile-nav-item:last-child {
+    border-bottom: none;
+}
+
+.apple-mobile-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--mega-menu-item-height);
+    padding: 0 var(--apple-spacing-sm);
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: -0.022em;
+    color: var(--theme-text-primary);
+    text-decoration: none;
+    transition: background var(--apple-duration-fast) var(--apple-easing);
+    min-height: var(--mega-menu-item-height); /* Touch-friendly */
+}
+
+.apple-mobile-nav-link:hover {
+    background: var(--theme-hover);
+    color: var(--theme-text-primary);
+    text-decoration: none;
+}
+
+.apple-mobile-nav-link:focus-visible {
+    outline: 2px solid var(--theme-blue);
+    outline-offset: -2px;
+}
+
+/* Mobile submenu arrow */
+.apple-mobile-nav-arrow {
+    width: 8px;
+    height: 8px;
+    border-right: 1px solid var(--theme-text-secondary);
+    border-bottom: 1px solid var(--theme-text-secondary);
+    transform: rotate(-45deg);
+    transition: transform var(--apple-duration-medium) var(--apple-easing);
+    flex-shrink: 0;
+}
+
+.apple-mobile-nav-item.has-submenu.active .apple-mobile-nav-arrow {
+    transform: rotate(45deg);
+}
+
+/* Mobile submenu */
+.apple-mobile-submenu {
+    background: var(--theme-bg-secondary);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--apple-duration-medium) var(--apple-easing);
+}
+
+.apple-mobile-nav-item.active .apple-mobile-submenu {
+    max-height: 1000px; /* Large enough for any submenu */
+}
+
+.apple-mobile-submenu-item {
+    border-bottom: 1px solid var(--theme-separator);
+}
+
+.apple-mobile-submenu-item:last-child {
+    border-bottom: none;
+}
+
+.apple-mobile-submenu-link {
+    display: block;
+    padding: 12px var(--apple-spacing-sm) 12px calc(var(--apple-spacing-sm) * 2);
+    font-size: 14px;
+    color: var(--theme-text-secondary);
+    text-decoration: none;
+    transition: all var(--apple-duration-fast) var(--apple-easing);
+    min-height: var(--mega-menu-submenu-height);
+    display: flex;
+    align-items: center;
+}
+
+.apple-mobile-submenu-link:hover {
+    background: var(--theme-hover);
+    color: var(--theme-text-primary);
+    text-decoration: none;
+}
+
+.apple-mobile-submenu-link:focus-visible {
+    outline: 2px solid var(--theme-blue);
+    outline-offset: -2px;
+}
+
+/* ==================================================
+   DESKTOP MEGA MENU (HIDDEN ON MOBILE)
+   ================================================== */
+
+.apple-mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--theme-bg-primary);
+    border-top: 1px solid var(--theme-separator);
+    box-shadow: var(--mega-menu-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--apple-duration-medium) var(--apple-easing);
+    z-index: 9997;
+    display: none; /* Hidden on mobile */
+}
+
+.apple-mega-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.apple-mega-menu-content {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px var(--apple-spacing-sm);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+/* Mega menu sections */
+.apple-mega-menu-section h3 {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--theme-text-secondary);
+    margin: 0 0 var(--apple-spacing-sm) 0;
+    text-transform: uppercase;
+}
+
+.apple-mega-menu-section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.apple-mega-menu-section li {
+    margin-bottom: var(--apple-spacing-xs);
+}
+
+.apple-mega-menu-section a {
+    font-size: 12px;
+    color: var(--theme-text-primary);
+    text-decoration: none;
+    transition: color var(--apple-duration-fast) var(--apple-easing);
+    display: block;
+    padding: 4px 0;
+}
+
+.apple-mega-menu-section a:hover {
+    color: var(--theme-blue);
+    text-decoration: none;
+}
+
+.apple-mega-menu-section a:focus-visible {
+    outline: 2px solid var(--theme-blue);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Mega menu backdrop */
+.mega-menu-backdrop {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, var(--mega-menu-backdrop-opacity));
+    z-index: 9996;
+    opacity: 0;
+    transition: opacity var(--apple-duration-medium) var(--apple-easing);
+}
+
+/* ==================================================
+   RESPONSIVE DESIGN - TABLET & DESKTOP
+   ================================================== */
+
+/* Tablet and above: Show desktop navigation */
+@media (min-width: 735px) {
+    .apple-navbar-nav {
+        display: flex;
+    }
+
+    .apple-navbar-toggle {
+        display: none;
+    }
+
+    .apple-mobile-menu {
+        display: none !important; /* Force hide on desktop */
+    }
+
+    .apple-mega-menu {
+        display: block; /* Show mega menus on desktop */
+    }
+}
+
+/* Large tablet and small desktop */
+@media (min-width: 735px) and (max-width: 1067px) {
+    .apple-navbar-inner {
+        padding: 0 var(--apple-spacing-sm);
+    }
+
+    .apple-mega-menu-content {
+        padding: 32px var(--apple-spacing-sm);
+        gap: 32px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+/* Standard desktop */
+@media (min-width: 1068px) {
+    .apple-navbar-inner {
+        padding: 0 var(--apple-spacing-sm);
+    }
+}
+
+/* Large desktop */
+@media (min-width: 1441px) {
+    .apple-navbar-inner {
+        max-width: 1024px;
+    }
+
+    .apple-mega-menu-content {
+        max-width: 1024px;
+        padding: 48px var(--apple-spacing-sm);
+        gap: 48px;
+    }
+}
+
+/* ==================================================
+   DARK THEME ENHANCEMENTS
+   ================================================== */
+
+[data-theme="dark"] .apple-mega-menu {
+    box-shadow: var(--mega-menu-shadow-dark);
+}
+
+[data-theme="dark"] .mega-menu-backdrop {
+    background: rgba(255, 255, 255, calc(var(--mega-menu-backdrop-opacity) * 0.5));
+}
+
+/* ==================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ================================================== */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .apple-navbar-toggle-icon span,
+    .apple-mobile-nav-arrow,
+    .apple-mega-menu,
+    .apple-mobile-menu,
+    .apple-mobile-submenu {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .apple-mobile-menu {
+        transition: transform 0.01ms !important;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .apple-nav-link,
+    .apple-mobile-nav-link,
+    .apple-mobile-submenu-link {
+        border: 1px solid transparent;
+    }
+
+    .apple-nav-link:focus,
+    .apple-mobile-nav-link:focus,
+    .apple-mobile-submenu-link:focus {
+        border-color: var(--theme-text-primary);
+        outline-width: 3px;
+    }
+
+    .apple-mega-menu {
+        border: 2px solid var(--theme-separator);
+    }
+}
+
+/* ==================================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ================================================== */
+
+/* Ensure touch targets are at least 44px */
+@media (hover: none) and (pointer: coarse) {
+    .apple-mobile-nav-link {
+        min-height: 44px;
+        padding: 8px var(--apple-spacing-sm);
+    }
+
+    .apple-mobile-submenu-link {
+        min-height: 36px;
+        padding: 8px var(--apple-spacing-sm) 8px calc(var(--apple-spacing-sm) * 2);
+    }
+
+    .apple-navbar-toggle {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+/* ==================================================
+   LOADING STATE & SKELETON ANIMATIONS
+   ================================================== */
+
+.apple-mega-menu.loading .apple-mega-menu-content {
+    opacity: 0.5;
+}
+
+.apple-mega-menu.loading .apple-mega-menu-section a {
+    background: linear-gradient(90deg, transparent 25%, rgba(0, 0, 0, 0.04) 50%, transparent 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ==================================================
+   PRINT STYLES
+   ================================================== */
+
+@media print {
+    .apple-navbar,
+    .apple-mobile-menu,
+    .apple-mega-menu,
+    .mega-menu-backdrop {
+        display: none !important;
+    }
+}
+
+/* ==================================================
+   PERFORMANCE OPTIMIZATIONS
+   ================================================== */
+
+/* GPU acceleration for smooth animations */
+.apple-mega-menu,
+.apple-mobile-menu,
+.apple-navbar-toggle-icon,
+.apple-mobile-nav-arrow {
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Remove will-change after animations complete */
+.apple-mega-menu:not(.active),
+.apple-mobile-menu:not(.active) {
+    will-change: auto;
+}
+
+/* ==================================================
+   UTILITY CLASSES FOR MEGA MENU
+   ================================================== */
+
+.mega-menu-hidden {
+    display: none !important;
+}
+
+.mega-menu-no-scroll {
+    overflow: hidden;
+}
+
+.mega-menu-focus-trap {
+    position: relative;
+}
+
+/* ==================================================
+   COMPONENT STATES
+   ================================================== */
+
+.apple-mega-menu[aria-hidden="true"] {
+    display: none;
+}
+
+.apple-mobile-menu[aria-hidden="true"] {
+    display: none;
+}
+
+/* Loading state */
+.apple-navbar.loading {
+    pointer-events: none;
+}
+
+.apple-navbar.loading .apple-nav-link,
+.apple-navbar.loading .apple-navbar-toggle {
+    opacity: 0.6;
+}

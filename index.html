@@ -28,7 +28,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/pages/home.css">
-
+    <link rel="stylesheet" href="css/components/mega-menu.css">
     <!-- CSS DRY theme system (tambahan) -->
     <link rel="stylesheet" href="css/theme.css">
 
@@ -134,26 +134,279 @@
 </head>
 <body>
 <!-- Header Navigation -->
-<header class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#" aria-label="Optiontech Home">
+<!-- Updated Header Navigation with Mega Menu -->
+<header class="apple-navbar" role="banner">
+    <div class="apple-navbar-inner">
+        <a class="apple-navbar-brand" href="#" aria-label="Optiontech Home">
             optiontech
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <!-- Desktop Navigation with Mega Menu -->
+        <ul class="apple-navbar-nav" role="menubar">
+            <!-- Services with Mega Menu -->
+            <li class="apple-nav-item" role="none">
+                <a href="#services"
+                   class="apple-nav-link"
+                   role="menuitem"
+                   aria-haspopup="true"
+                   aria-expanded="false"
+                   data-mega-menu="services">
+                    Services
+                </a>
+            </li>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <nav class="navbar-nav ms-auto" role="navigation">
-                <a class="nav-link" href="#services">Services</a>
-                <a class="nav-link" href="#about">Why TechFix Pro</a>
-                <a class="nav-link" href="contact.html">Support</a>
-                <a class="nav-link" href="tel:+1-555-TECH-FIX">📞</a>
-            </nav>
+            <!-- Products with Mega Menu -->
+            <li class="apple-nav-item" role="none">
+                <a href="#products"
+                   class="apple-nav-link"
+                   role="menuitem"
+                   aria-haspopup="true"
+                   aria-expanded="false"
+                   data-mega-menu="products">
+                    Products
+                </a>
+            </li>
+
+            <!-- Support -->
+            <li class="apple-nav-item" role="none">
+                <a href="#support" class="apple-nav-link" role="menuitem">
+                    Support
+                </a>
+            </li>
+
+            <!-- About -->
+            <li class="apple-nav-item" role="none">
+                <a href="#about" class="apple-nav-link" role="menuitem">
+                    Why TechFix Pro
+                </a>
+            </li>
+
+            <!-- Contact -->
+            <li class="apple-nav-item" role="none">
+                <a href="contact.html" class="apple-nav-link" role="menuitem">
+                    Contact
+                </a>
+            </li>
+
+            <!-- Phone -->
+            <li class="apple-nav-item" role="none">
+                <a href="tel:+1-555-TECH-FIX" class="apple-nav-link" role="menuitem" aria-label="Call us">
+                    📞
+                </a>
+            </li>
+        </ul>
+
+        <!-- Mobile Toggle Button -->
+        <button class="apple-navbar-toggle"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                aria-controls="mobile-menu">
+            <div class="apple-navbar-toggle-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+    </div>
+
+    <!-- Services Mega Menu -->
+    <div class="apple-mega-menu"
+         id="mega-menu-services"
+         role="menu"
+         aria-label="Services menu"
+         aria-hidden="true">
+        <div class="apple-mega-menu-content">
+            <div class="apple-mega-menu-section">
+                <h3>Repair Services</h3>
+                <ul role="none">
+                    <li><a href="services.html#screen-repair" role="menuitem">Screen Repair</a></li>
+                    <li><a href="services.html#keyboard-replacement" role="menuitem">Keyboard Replacement</a></li>
+                    <li><a href="services.html#battery-service" role="menuitem">Battery Service</a></li>
+                    <li><a href="services.html#motherboard-repair" role="menuitem">Motherboard Repair</a></li>
+                    <li><a href="services.html#liquid-damage" role="menuitem">Liquid Damage Repair</a></li>
+                    <li><a href="services.html#fan-cooling" role="menuitem">Fan & Cooling</a></li>
+                </ul>
+            </div>
+
+            <div class="apple-mega-menu-section">
+                <h3>Upgrades</h3>
+                <ul role="none">
+                    <li><a href="services.html#ram-upgrade" role="menuitem">RAM Upgrade</a></li>
+                    <li><a href="services.html#ssd-installation" role="menuitem">SSD Installation</a></li>
+                    <li><a href="services.html#graphics-upgrade" role="menuitem">Graphics Card Upgrade</a></li>
+                    <li><a href="services.html#performance-optimization" role="menuitem">Performance Optimization</a></li>
+                    <li><a href="services.html#port-repair" role="menuitem">Port Repair</a></li>
+                </ul>
+            </div>
+
+            <div class="apple-mega-menu-section">
+                <h3>Software Services</h3>
+                <ul role="none">
+                    <li><a href="services.html#os-installation" role="menuitem">OS Installation</a></li>
+                    <li><a href="services.html#virus-removal" role="menuitem">Virus Removal</a></li>
+                    <li><a href="services.html#data-recovery" role="menuitem">Data Recovery</a></li>
+                    <li><a href="services.html#system-cleanup" role="menuitem">System Cleanup</a></li>
+                    <li><a href="services.html#driver-updates" role="menuitem">Driver Updates</a></li>
+                    <li><a href="services.html#backup-setup" role="menuitem">Backup Setup</a></li>
+                </ul>
+            </div>
+
+            <div class="apple-mega-menu-section">
+                <h3>Business Services</h3>
+                <ul role="none">
+                    <li><a href="services.html#bulk-repairs" role="menuitem">Bulk Repairs</a></li>
+                    <li><a href="services.html#maintenance-contracts" role="menuitem">Maintenance Contracts</a></li>
+                    <li><a href="services.html#onsite-support" role="menuitem">On-site Support</a></li>
+                    <li><a href="services.html#emergency-service" role="menuitem">Emergency Service</a></li>
+                    <li><a href="services.html#fleet-management" role="menuitem">Fleet Management</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Mega Menu -->
+    <div class="apple-mega-menu"
+         id="mega-menu-products"
+         role="menu"
+         aria-label="Products menu"
+         aria-hidden="true">
+        <div class="apple-mega-menu-content">
+            <div class="apple-mega-menu-section">
+                <h3>Laptops</h3>
+                <ul role="none">
+                    <li><a href="products.html#business-laptops" role="menuitem">Business Laptops</a></li>
+                    <li><a href="products.html#gaming-laptops" role="menuitem">Gaming Laptops</a></li>
+                    <li><a href="products.html#ultrabooks" role="menuitem">Ultrabooks</a></li>
+                    <li><a href="products.html#2-in-1-devices" role="menuitem">2-in-1 Devices</a></li>
+                    <li><a href="products.html#workstations" role="menuitem">Workstations</a></li>
+                </ul>
+            </div>
+
+            <div class="apple-mega-menu-section">
+                <h3>Accessories</h3>
+                <ul role="none">
+                    <li><a href="products.html#chargers-adapters" role="menuitem">Chargers & Adapters</a></li>
+                    <li><a href="products.html#docking-stations" role="menuitem">Docking Stations</a></li>
+                    <li><a href="products.html#external-drives" role="menuitem">External Drives</a></li>
+                    <li><a href="products.html#protective-cases" role="menuitem">Protective Cases</a></li>
+                    <li><a href="products.html#cooling-pads" role="menuitem">Cooling Pads</a></li>
+                    <li><a href="products.html#mice-keyboards" role="menuitem">Mice & Keyboards</a></li>
+                </ul>
+            </div>
+
+            <div class="apple-mega-menu-section">
+                <h3>Components</h3>
+                <ul role="none">
+                    <li><a href="products.html#memory-ram" role="menuitem">Memory (RAM)</a></li>
+                    <li><a href="products.html#storage-ssd-hdd" role="menuitem">Storage (SSD/HDD)</a></li>
+                    <li><a href="products.html#replacement-parts" role="menuitem">Replacement Parts</a></li>
+                    <li><a href="products.html#cooling-solutions" role="menuitem">Cooling Solutions</a></li>
+                    <li><a href="products.html#batteries" role="menuitem">Batteries</a></li>
+                    <li><a href="products.html#screens-displays" role="menuitem">Screens & Displays</a></li>
+                </ul>
+            </div>
+
+            <div class="apple-mega-menu-section">
+                <h3>Certified Refurbished</h3>
+                <ul role="none">
+                    <li><a href="products.html#refurb-business" role="menuitem">Business Grade</a></li>
+                    <li><a href="products.html#refurb-consumer" role="menuitem">Consumer Grade</a></li>
+                    <li><a href="products.html#refurb-gaming" role="menuitem">Gaming Systems</a></li>
+                    <li><a href="products.html#warranty-options" role="menuitem">Warranty Options</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </header>
+
+<!-- Mobile Menu -->
+<div class="apple-mobile-menu"
+     id="mobile-menu"
+     role="menu"
+     aria-label="Mobile navigation"
+     aria-hidden="true">
+    <div class="apple-mobile-menu-content">
+        <!-- Services Mobile Menu -->
+        <div class="apple-mobile-nav-item has-submenu">
+            <a href="#services"
+               class="apple-mobile-nav-link"
+               role="menuitem"
+               aria-haspopup="true"
+               aria-expanded="false">
+                Services
+                <div class="apple-mobile-nav-arrow" aria-hidden="true"></div>
+            </a>
+            <div class="apple-mobile-submenu" role="menu" aria-label="Services submenu">
+                <div class="apple-mobile-submenu-item">
+                    <a href="services.html#screen-repair" class="apple-mobile-submenu-link" role="menuitem">Screen Repair</a>
+                </div>
+                <div class="apple-mobile-submenu-item">
+                    <a href="services.html#hardware-upgrade" class="apple-mobile-submenu-link" role="menuitem">Hardware Upgrade</a>
+                </div>
+                <div class="apple-mobile-submenu-item">
+                    <a href="services.html#virus-removal" class="apple-mobile-submenu-link" role="menuitem">Virus Removal</a>
+                </div>
+                <div class="apple-mobile-submenu-item">
+                    <a href="services.html#data-recovery" class="apple-mobile-submenu-link" role="menuitem">Data Recovery</a>
+                </div>
+                <div class="apple-mobile-submenu-item">
+                    <a href="services.html#system-optimization" class="apple-mobile-submenu-link" role="menuitem">System Optimization</a>
+                </div>
+                <div class="apple-mobile-submenu-item">
+                    <a href="services.html#business-services" class="apple-mobile-submenu-link" role="menuitem">Business Services</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Mobile Menu -->
+        <div class="apple-mobile-nav-item has-submenu">
+            <a href="#products"
+               class="apple-mobile-nav-link"
+               role="menuitem"
+               aria-haspopup="true"
+               aria-expanded="false">
+                Products
+                <div class="apple-mobile-nav-arrow" aria-hidden="true"></div>
+            </a>
+            <div class="apple-mobile-submenu" role="menu" aria-label="Products submenu">
+                <div class="apple-mobile-submenu-item">
+                    <a href="products.html#business-laptops" class="apple-mobile-submenu-link" role="menuitem">Business Laptops</a>
+                </div>
+                <div class="apple-mobile-submenu-item">
+                    <a href="products.html#gaming-laptops" class="apple-mobile-submenu-link" role="menuitem">Gaming Laptops</a>
+                </div>
+                <div class="apple-mobile-submenu-item">
+                    <a href="products.html#accessories" class="apple-mobile-submenu-link" role="menuitem">Accessories</a>
+                </div>
+                <div class="apple-mobile-submenu-item">
+                    <a href="products.html#components" class="apple-mobile-submenu-link" role="menuitem">Components</a>
+                </div>
+                <div class="apple-mobile-submenu-item">
+                    <a href="products.html#refurbished" class="apple-mobile-submenu-link" role="menuitem">Certified Refurbished</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Simple Menu Items (No Submenu) -->
+        <div class="apple-mobile-nav-item">
+            <a href="#support" class="apple-mobile-nav-link" role="menuitem">Support</a>
+        </div>
+
+        <div class="apple-mobile-nav-item">
+            <a href="#about" class="apple-mobile-nav-link" role="menuitem">Why TechFix Pro</a>
+        </div>
+
+        <div class="apple-mobile-nav-item">
+            <a href="contact.html" class="apple-mobile-nav-link" role="menuitem">Contact</a>
+        </div>
+
+        <div class="apple-mobile-nav-item">
+            <a href="tel:+1-555-TECH-FIX" class="apple-mobile-nav-link" role="menuitem">
+                📞 Call Now
+            </a>
+        </div>
+    </div>
+</div>
 
 <main>
     <!-- Hero Section -->
@@ -266,11 +519,6 @@
                 </div>
             </div>
         </div>
-    </section></div>
-    </article>
-    </div>
-    </div>
-    </div>
     </section>
 
     <!-- About Snippet Section -->

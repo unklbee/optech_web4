@@ -4,6 +4,7 @@ import { debounce, APPLE_EASING } from '../core/utils.js';
 import { isIOS, isTouchDevice, getViewport } from '../core/device.js';
 import { addEvent, $, $$ } from '../core/dom.js';
 import { scrollToElement } from '../core/animation.js';
+import { AppleMegaMenu } from './mega-menu.js';
 
 /**
  * Apple-style Navbar Component
@@ -36,6 +37,11 @@ export class AppleNavbar {
         this.cleanupFunctions = [];
 
         this.init();
+
+        // Initialize mega menu if apple-navbar class is present
+        if (this.navbar.classList.contains('apple-navbar')) {
+            this.megaMenu = new AppleMegaMenu(selector, options.megaMenuOptions);
+        }
     }
 
     /**
@@ -442,6 +448,11 @@ export class AppleNavbar {
         // Restore body scroll if needed
         if (isIOS() && this.state.isOpen) {
             this.restoreBodyScroll();
+        }
+
+        // Clean up mega menu
+        if (this.megaMenu) {
+            this.megaMenu.destroy();
         }
 
         console.log('🍎 Apple Navbar destroyed');

@@ -14,6 +14,7 @@ import * as Observers from './core/observers.js';
 
 // Components
 import { AppleNavbar, initNavbar } from './components/navbar.js';
+import { AppleMegaMenu, initMegaMenu } from './components/mega-menu.js';
 
 /**
  * Global Apple object for external access
@@ -37,6 +38,9 @@ window.AppleGlobal = {
     // Components
     AppleNavbar,
     initNavbar,
+
+    AppleMegaMenu,
+    initMegaMenu,
 
     // Selector aliases for easier access
     select: DOM.$,
@@ -194,16 +198,23 @@ class AppleGlobalController {
      */
     async initComponents() {
         try {
-            // Auto-initialize navbar with error handling
-            const navbar = document.querySelector('.navbar');
+            // Initialize mega menu
+            const navbar = document.querySelector('.apple-navbar');
             if (navbar) {
                 try {
-                    const navbarInstance = initNavbar('.navbar');
-                    this.components.set('navbar', navbarInstance);
+                    const megaMenuInstance = initMegaMenu('.apple-navbar', {
+                        mobileBreakpoint: 735,
+                        animationDuration: 300,
+                        backdropOpacity: 0.1,
+                        hoverDelay: 100
+                    });
+                    this.components.set('megaMenu', megaMenuInstance);
+                    console.log('🍎 Mega Menu initialized');
                 } catch (error) {
-                    console.warn('🍎 Navbar initialization failed:', error);
+                    console.warn('🍎 Mega Menu initialization failed:', error);
                 }
             }
+
 
             // Initialize lazy loading with error handling
             try {
